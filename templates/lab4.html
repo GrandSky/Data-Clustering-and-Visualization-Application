@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/d3.v7.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/lab4.js') }}"></script>
+    <script>
+        var numericJsonData = {{ numeric_data_json | safe }};
+        var categoricalJsonData= {{ categorical_data_json | safe }};
+        console.log(categoricalJsonData)
+        console.log(numericJsonData)
+    </script>
+</head>
+<body>
+    <button><a href="/kmeans">Kmeans</a></button>
+    <div id="bar-chart-container" class="visualization-container">
+        <br>
+        Bar Chart
+        <label for="bar-chart-variable">Select Variable:</label>
+        <select id="bar-chart-variable" onchange="updateBar()">
+            <!-- Populate options dynamically based on data columns -->
+            <option value="none">none</option>
+            <script>
+                // Populate options dynamically based on data columns
+                var keys = Object.keys(categoricalJsonData[0]);
+                keys.forEach(function (key) {
+                    document.write('<option value="' + key + '">' + key + '</option>');
+                });
+            </script>
+            <script>
+                // Populate options dynamically based on data columns
+                var keys = Object.keys(numericJsonData[0]);
+                keys.forEach(function (key) {
+                    document.write('<option value="' + key + '">' + key + '</option>');
+                });
+            </script>
+        </select>
+        <div id="bar-chart-svg"></div>
+        <div id="biplot-container" class="visualization-container">
+            <br>
+            
+            <div id="biplot-svg"></div>
+            <div id="parallel-plot-svg"></div>
+            <div id="mds-plot-svg"></div>
+        </div>
+    </div>
+
+   
+</body>
+</html>
