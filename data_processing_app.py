@@ -22,7 +22,7 @@ def index():
     categorical_data_json = categorical.to_json(orient='records')
     numeric_data_json = numeric.to_json(orient='records')
 
-    return render_template('lab4.html', numeric_data_json=numeric_data_json, categorical_data_json=categorical_data_json)
+    return render_template('index.html', numeric_data_json=numeric_data_json, categorical_data_json=categorical_data_json)
 
 @app.route('/kmeans')
 def kmeans():
